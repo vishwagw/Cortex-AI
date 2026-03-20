@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sidebar-w: 240px;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: #05070f;
+    color: theme('colors.slate.200');
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar       { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+  /* Mapbox overrides */
+  .mapboxgl-ctrl-logo,
+  .mapboxgl-ctrl-attrib { display: none !important; }
+
+  .mapboxgl-popup-content {
+    background: #0b0e1a !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    color: theme('colors.slate.200') !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+    font-family: inherit !important;
+  }
+}
+
+@layer components {
+  /* ── Card ────────────────────────────────────────────────────────────── */
+  .card {
+    @apply bg-app-surface border border-white/[0.06] rounded-xl;
+  }
+
+  .card-sm {
+    @apply bg-app-surface border border-white/[0.06] rounded-lg;
+  }
+
+  /* ── Input ───────────────────────────────────────────────────────────── */
+  .input {
+    @apply w-full bg-app-bg border border-white/[0.08] rounded-lg
+           px-3 py-2 text-sm text-slate-200 placeholder:text-slate-500
+           focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20
+           transition-colors;
+  }
+
+  /* ── Label ───────────────────────────────────────────────────────────── */
+  .label {
+    @apply block text-xs font-medium text-slate-400 mb-1.5;
+  }
+
+  /* ── Button variants ─────────────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg
+           text-sm font-medium transition-all duration-150
+           focus:outline-none focus:ring-2 focus:ring-cyan-400/30
+           disabled:opacity-40 disabled:pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-cyan-400 text-app-bg px-4 py-2
+           hover:bg-cyan-300 active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn bg-transparent border border-white/10 text-slate-200 px-4 py-2
+           hover:border-white/20 hover:bg-white/[0.04] active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn text-slate-400 px-3 py-1.5
+           hover:text-slate-200 hover:bg-white/[0.04];
+  }
+
+  .btn-danger {
+    @apply btn bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2
+           hover:bg-red-500/20;
+  }
+
+  /* ── Badge ───────────────────────────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  /* ── Status dot ──────────────────────────────────────────────────────── */
+  .status-dot {
+    @apply inline-block w-1.5 h-1.5 rounded-full;
+  }
+
+  /* ── Mono tag (for IDs, codes) ───────────────────────────────────────── */
+  .mono-tag {
+    @apply font-mono text-xs text-slate-500 bg-slate-800/60 px-1.5 py-0.5 rounded;
+  }
+
+  /* ── Section heading ─────────────────────────────────────────────────── */
+  .section-label {
+    @apply text-[0.65rem] font-medium tracking-widest uppercase text-slate-500 mb-3;
+  }
+
+  /* ── Sidebar active nav item ─────────────────────────────────────────── */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-400
+           hover:text-slate-200 hover:bg-white/[0.04] transition-colors cursor-pointer;
+  }
+
+  .nav-item.active {
+    @apply text-cyan-400 bg-cyan-400/[0.08] hover:bg-cyan-400/[0.1];
+  }
+
+  /* ── Table ───────────────────────────────────────────────────────────── */
+  .data-table {
+    @apply w-full text-sm;
+  }
+
+  .data-table th {
+    @apply text-left text-xs font-medium text-slate-500 uppercase tracking-wider
+           px-4 py-3 border-b border-white/[0.05];
+  }
+
+  .data-table td {
+    @apply px-4 py-3.5 border-b border-white/[0.04] text-slate-300;
+  }
+
+  .data-table tr:hover td {
+    @apply bg-white/[0.02];
+  }
+
+  .data-table tr:last-child td {
+    @apply border-b-0;
+  }
+}
+
+/* ── Page transitions ────────────────────────────────────────────────────── */
+@layer utilities {
+  .page-enter {
+    animation: pageEnter 0.2s ease-out both;
+  }
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
